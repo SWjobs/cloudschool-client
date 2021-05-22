@@ -1,0 +1,36 @@
+.Footer {
+    background-color: rgb(195, 210, 226);
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    
+    h4 {
+        font-family: "NanumSquare";
+        font-weight: 1000;
+        color: rgb(59, 59, 59);
+    }
+    h5 {
+        font-family: "NanumBarunGothic";
+        font-weight: 600;
+        font-size: 13pt;
+        color: rgb(59, 59, 59);
+    }
+    p {
+        font-family: "NanumSquare";
+        font-weight: 800;
+        color: rgb(59, 59, 59);
+    }
+    li {
+        padding-bottom: 0.25rem;
+    }
+    a {
+        font-size: 15px;
+        color: rgb(59, 59, 59);
+        font-family: "NanumBarunGothic";
+    }
+}
+
+.FooterCopyright {
+    font-family: "NanumBarunGothic";
+    font-size: 10pt;
+    color: rgb(59, 59, 59);
+}
