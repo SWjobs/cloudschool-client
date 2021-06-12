@@ -5,12 +5,11 @@ import { Container, Col, Form, Row } from "react-bootstrap";
 
 const Register: NextPage = () => {
   return <Layout>
-    <Container fluid="sm" className="mt-4" style={{ maxWidth: 900 }}>
-      <h3 className="py-5">CloudSchool 회원 가입</h3>
+    <Container fluid="sm" className="mt-5" style={{ maxWidth: 900 }}>
+      <h3 className="mb-5">CloudSchool 회원 가입</h3>
       <Form noValidate>
-        <Form.Text className="font-weight-bold pb-2">* 표시는 필수 항목</Form.Text>
         <Row>
-          <Form.Label column xs={12} sm={3} md={2}>*아이디:</Form.Label>
+          <Form.Label column xs={12} sm={3} md={2}>아이디:</Form.Label>
           <Col>
             <Form.Group>
               <Form.Control type="text" placeholder="Awesome123" />
@@ -18,16 +17,15 @@ const Register: NextPage = () => {
           </Col>
         </Row>
         <Row>
-          <Form.Label column xs={12} sm={3} md={2}>*패스워드:</Form.Label>
+          <Form.Label column xs={12} sm={3} md={2}>패스워드:</Form.Label>
           <Col>
             <Form.Group>
               <Form.Control type="password" />
             </Form.Group>
           </Col>
-        </Row>
-
-        <Row className="mt-3">
-          <Form.Label column xs={12} sm={3} md={2}>*이름:</Form.Label>
+        </Row> 
+        <Row>
+          <Form.Label column xs={12} sm={3} md={2}>학교:</Form.Label>
           <Col>
             <Form.Group>
               <Form.Control type="text" />
@@ -35,6 +33,7 @@ const Register: NextPage = () => {
           </Col>
         </Row>
       </Form>
+  
     </Container>
   </Layout>
 }
