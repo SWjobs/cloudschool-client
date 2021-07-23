@@ -5,14 +5,14 @@ import { Container, Col, Form, Row, Button } from "react-bootstrap";
 
 const Register: NextPage = () => {
   return <Layout>
-    <Container fluid="sm" className="my-5" style={{ maxWidth: 900 }}>
+    <Container fluid="sm" className="my-5" style={{ maxWidth: 900, minHeight: '70vh' }}>
       <h3 className="mb-5">CloudSchool 회원 가입</h3>
       <Form noValidate>
         <Row>
           <Form.Label column xs={12} sm={3} md={2}>아이디:</Form.Label>
           <Col>
             <Form.Group>
-              <Form.Control type="text" placeholder="Awesome123" />
+              <Form.Control type="text" placeholder="아이디" />
             </Form.Group>
           </Col>
         </Row>
@@ -20,15 +20,15 @@ const Register: NextPage = () => {
           <Form.Label column xs={12} sm={3} md={2}>패스워드:</Form.Label>
           <Col>
             <Form.Group>
-              <Form.Control type="password" />
+              <Form.Control type="password" placeholder="패스워드" />
             </Form.Group>
           </Col>
         </Row> 
         <Row>
-          <Form.Label column xs={12} sm={3} md={2}>학교:</Form.Label>
+          <Form.Label column xs={12} sm={3} md={2}>조직 이름:</Form.Label>
           <Col>
             <Form.Group>
-              <Form.Control type="text" />
+              <Form.Control type="text" placeholder="학교/회사 등" />
             </Form.Group>
           </Col>
         </Row>

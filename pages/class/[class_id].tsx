@@ -15,6 +15,8 @@ export const getServerSideProps: GetServerSideProps<ClassHomeProps> = async cont
 
 const ClassHome: NextPage<ClassHomeProps> = ({ classId }) => {
   return (
-    
+    null
   )
 }
+
+export default ClassHome

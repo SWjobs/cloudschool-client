@@ -19,7 +19,7 @@ export default function Footer() {
             <p className="mb-2" style={{
               fontSize: '13pt'
             }}>
-              (대충 멋진 슬로건)
+              Everyday, Anywhere, for Everyone.
             </p>
           </Col>
           <Col md={2}>
