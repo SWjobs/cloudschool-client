@@ -1,7 +1,8 @@
 import React from "react"
 import Layout from "components/Layout"
 import { GetServerSideProps, NextPage } from "next"
-import { Button, Card, Col, Container, ListGroup, Nav, Row } from "react-bootstrap"
+import { Button, Card, Col, Container, ListGroup, Nav, Row, Tab, Tabs } from "react-bootstrap"
+import Main from "components/class/Main"
 
 interface ClassHomeProps {
   classId: string
@@ -24,63 +25,28 @@ const ClassHome: NextPage<ClassHomeProps> = ({ classId }) => {
           <h1 className="text-white" style={{ fontSize: 32 }}>2021 1-1 영어</h1>
         </Container>
       </div>
-      <Nav className="justify-content-center p-3" variant="pills" defaultActiveKey="main">
-        <Nav.Item>
-          <Nav.Link eventKey="main">메인</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="notices">공지</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="assignments">과제</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="boards">게시판</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="debates">토론</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="calandar">일정</Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <Tabs className="justify-content-center p-3" variant="pills" defaultActiveKey="main" id="class-tabs">
+        <Tab eventKey="main" title="메인">
+          <Container fluid="lg" className="mt-4 mb-5">
+            <Main />
+          </Container>
+        </Tab>
+        <Tab eventKey="notices" title="공지">
+          
+        </Tab>
+        <Tab eventKey="assignments" title="과제">
 
-      <Container fluid="lg" className="mt-4 mb-5">
-        <Row>
-          <Col xs={4}>
-            <Card border="light" className="shadow">
-              <Card.Header>시간표</Card.Header>
-              <Card.Body>
-                <Card.Title>1교시 <small>{new Date().toLocaleTimeString()}</small></Card.Title>
-                <Card.Text className="h1 font-weight-bold">국어</Card.Text>
-                <Card.Text>OOO 선생님</Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">다음 교시: 수학 (OOO 선생님)</small>
-              </Card.Footer>
-            </Card>
-          </Col>
-          <Col xs={8}>
-            <Card border="light" className="shadow">
-              <Card.Header>과제</Card.Header>
-              <ListGroup variant="flush">
-                <ListGroup.Item action>
-                  과제 1
-                </ListGroup.Item>
-                <ListGroup.Item action>
-                  과제 2
-                </ListGroup.Item>
-                <ListGroup.Item action>
-                  과제 3
-                </ListGroup.Item>
-              </ListGroup>
-              <Card.Footer className="text-right">
-                <a href="#">더보기</a>
-              </Card.Footer>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+        </Tab>
+        <Tab eventKey="boards" title="게시판">
+
+        </Tab>
+        <Tab eventKey="debates" title="토론">
+
+        </Tab>
+        <Tab eventKey="calendar" title="일정">
+
+        </Tab>
+      </Tabs>
     </Layout>
   )
 }
