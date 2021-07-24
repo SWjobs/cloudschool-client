@@ -1,11 +1,13 @@
 import React from "react"
-import { Row } from "react-bootstrap"
+import { Container, Row } from "react-bootstrap"
 
-const Calendar: React.FC = () => {
+const Calendar: React.FC<{ classId: string }> = ({ classId }) => {
   return (
-    <Row>
+    <Container fluid="lg" className="mt-4 mb-5" style={{ fontFamily: 'NanumSquare' }} >
+      <Row>
       
-    </Row>
+      </Row>
+    </Container>
   )
 }
 

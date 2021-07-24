@@ -1,11 +1,13 @@
 import React from "react"
-import { Row } from "react-bootstrap"
+import { Container, Row } from "react-bootstrap"
 
-const Assignments: React.FC = () => {
+const Assignments: React.FC<{ classId: string }> = ({ classId }) => {
   return (
-    <Row>
+    <Container fluid="lg" className="mt-4 mb-5" style={{ fontFamily: 'NanumSquare' }} >
+      <Row>
       
-    </Row>
+      </Row>
+    </Container>
   )
 }
 

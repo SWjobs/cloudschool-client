@@ -13,7 +13,7 @@ export default class Doc extends Document {
             content="CloudSchool"
           />
           <link rel="manifest" href="/manifest.json" />
-
+          <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"></link>
 
           <meta name='application-name' content='CloudSchool' />
           <meta name='apple-mobile-web-app-capable' content='yes' />
