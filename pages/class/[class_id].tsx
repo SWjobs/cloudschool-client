@@ -3,6 +3,11 @@ import Layout from "components/Layout"
 import { GetServerSideProps, NextPage } from "next"
 import { Button, Card, Col, Container, ListGroup, Nav, Row, Tab, Tabs } from "react-bootstrap"
 import Main from "components/class/Main"
+import Notices from "components/class/Notices"
+import Assignments from "components/class/Assignments"
+import Boards from "components/class/Boards"
+import Debates from "components/class/Debates"
+import Calendar from "components/class/Calendar"
 
 interface ClassHomeProps {
   classId: string
@@ -32,19 +37,29 @@ const ClassHome: NextPage<ClassHomeProps> = ({ classId }) => {
           </Container>
         </Tab>
         <Tab eventKey="notices" title="공지">
-          
+          <Container fluid="lg" className="mt-4 mb-5">
+            <Notices />
+          </Container>
         </Tab>
         <Tab eventKey="assignments" title="과제">
-
+          <Container fluid="lg" className="mt-4 mb-5">
+            <Assignments />
+          </Container>
         </Tab>
         <Tab eventKey="boards" title="게시판">
-
+          <Container fluid="lg" className="mt-4 mb-5">
+            <Boards />
+          </Container>
         </Tab>
         <Tab eventKey="debates" title="토론">
-
+          <Container fluid="lg" className="mt-4 mb-5">
+            <Debates />
+          </Container>
         </Tab>
         <Tab eventKey="calendar" title="일정">
-
+          <Container fluid="lg" className="mt-4 mb-5">
+            <Calendar />
+          </Container>
         </Tab>
       </Tabs>
     </Layout>
