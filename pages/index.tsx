@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import { Button, Container } from 'react-bootstrap'
+import { Button, Container,Row } from 'react-bootstrap'
 import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons'
 import Router from 'next/router'
 
@@ -20,10 +20,18 @@ const IndexPage = () => (
       </Container>
     </div>
 
-    <div className="bg-white" style={{ height: 500 }}>
+   
+
+
+      <div className="bg-white" style={{ height: 500 }}>
       <Container fluid="sm" className="d-flex align-items-center h-100">
-        <h4 className="sm" style={{ fontSize: 50 }}>Everyday, Anywhere, for Everyone.</h4>
+      
+        <h4 className="sm" style={{ fontSize: 50 }}>Everyday, Everywhere, for Everyone.</h4>
+        <img className="d-none d-lg-block" src="/assets/cloud-computing.svg" style={{ width: 150 }} />
+
       </Container>
+
+
     </div>
   </Layout>
 )

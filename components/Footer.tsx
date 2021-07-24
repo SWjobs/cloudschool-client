@@ -19,7 +19,7 @@ export default function Footer() {
             <p className="mb-2" style={{
               fontSize: '13pt'
             }}>
-              Everyday, Anywhere, for Everyone.
+              Everyday, Everywhere, for Everyone.
             </p>
           </Col>
           <Col md={2}>
