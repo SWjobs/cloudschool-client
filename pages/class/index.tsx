@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from 'components/Layout'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
+import Router from 'next/router'
 
 const Classrooms = () => {
   return (
@@ -20,7 +21,7 @@ const Classrooms = () => {
           </Row>
           <Row>
             <Col xs={4}>
-              <Card bg="light" className="cursor-pointer shadow-sm">
+              <Card className="cursor-pointer shadow-sm" onClick={() => Router.push('/class/asdf', undefined, { shallow: true })}>
                 <Card.Body>
                   <Card.Title>2021 1-1 영어</Card.Title>
                   <Card.Text>2021학년도 1학년 1학기 영어</Card.Text>
