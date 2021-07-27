@@ -3,6 +3,7 @@ import Layout from "components/Layout"
 import { GetServerSideProps, NextPage } from "next"
 import { Card, Col, Container, ListGroup, Row } from "react-bootstrap"
 import ClassLayout from "components/ClassLayout"
+import Link from "next/link"
 
 interface ClassHomeProps {
   classId: string
@@ -65,7 +66,7 @@ const ClassHome: NextPage<ClassHomeProps> = ({ classId }) => {
                   </ListGroup.Item>
                 </ListGroup>
                 <Card.Footer className="text-right">
-                  <a href="#">더보기</a>
+                  <Link href={`/class/${classId}/assignments`} shallow>더보기</Link>
                 </Card.Footer>
               </Card>
             </Col>
@@ -96,7 +97,7 @@ const ClassHome: NextPage<ClassHomeProps> = ({ classId }) => {
                   </ListGroup.Item>
                 </ListGroup>
                 <Card.Footer className="text-right">
-                  <a href="#">더보기</a>
+                  <Link href={`/class/${classId}/notices`} shallow>더보기</Link>
                 </Card.Footer>
               </Card>
             </Col>
@@ -127,7 +128,7 @@ const ClassHome: NextPage<ClassHomeProps> = ({ classId }) => {
                   </ListGroup.Item>
                 </ListGroup>
                 <Card.Footer className="text-right">
-                  <a href="#">더보기</a>
+                  <Link href={`/class/${classId}/debates`} shallow>더보기</Link>
                 </Card.Footer>
               </Card>
             </Col>
