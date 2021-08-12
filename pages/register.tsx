@@ -10,10 +10,12 @@ import Image from 'next/image'
 const Register: NextPage = () => {
   const [processing, setProcessing] = useState(false)
   const [userId, setUserId] = useState('')
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [orgName, setOrgName] = useState<string | null>(null)
 
   const [userIdValidate, setUserIdValidate] = useState<boolean | undefined>()
+  const [nameValidate, setNameValidate] = useState<boolean | undefined>()
   const [passwordValidate, setPasswordValidate] = useState<boolean | undefined>()
 
   const [checkedDuplicate, setCheckedDuplicate] = useState<boolean | undefined>()
@@ -55,12 +57,41 @@ const Register: NextPage = () => {
           </Col>
           <Col xs="auto" className="pl-0">
             <Button variant="secondary" disabled={checkedDuplicate === false || !userId} onClick={async () => {
+              console.log({
+                userId,
+                name,
+                password,
+                orgName
+              })
+
               let v = await axios.get(`${api}/auth/check-duplicate?user_id=${userId}`).then(r => r.data.isDuplicate) as boolean
               setCheckedDuplicate(v)
               setUserIdValidate(v)
+
+              
             }}>
               중복 확인
             </Button>
+          </Col>
+        </Row>
+        <Row>
+          <Form.Label column xs={12} sm={3} md={2}>이름*:</Form.Label>
+          <Col>
+            <Form.Group controlId="userId">
+              <Form.Control
+                type="text"
+                placeholder="사용자 이름"
+                isInvalid={nameValidate}
+                value={name}
+                onChange={e => {
+                  setName(e.target.value)
+                  setNameValidate(!e.target.value)
+                }}
+              />
+              <Form.Control.Feedback type="invalid">
+                이름을 입력하세요!
+              </Form.Control.Feedback>
+            </Form.Group>
           </Col>
         </Row>
         <Row>
@@ -98,10 +129,11 @@ const Register: NextPage = () => {
         </Row>
         <Row className="mt-4">
           <Col className="w-100 text-right">
-            <Button variant="success" style={{ width: 160 }} disabled={processing || !userId || userIdValidate || !password || passwordValidate || checkedDuplicate !== false} onClick={() => {
+            <Button variant="success" style={{ width: 160 }} disabled={processing || !userId || userIdValidate || !name || nameValidate || !password || passwordValidate || checkedDuplicate !== false} onClick={() => {
               setProcessing(true)
               axios.post(`${api}/auth/register`, {
                 userId,
+                name,
                 password,
                 orgName
               })

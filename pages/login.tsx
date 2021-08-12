@@ -22,12 +22,11 @@ const Login: NextPage = () => {
           password: passwordRef.current.value
         })
         localStorage.setItem('token', data.token)
+        Router.push('/', undefined, { shallow: true })
       }
       catch (_e) {
         const e: AxiosError = _e
         if (e.response?.status === 400) setPasswordIncorrect(true)
-      }
-      finally {
         setLoggingIn(false)
       }
     }
@@ -42,7 +41,7 @@ const Login: NextPage = () => {
             <Form.Control placeholder="아이디" ref={idRef} />
           </Form.Group>
           <Form.Group>
-            <Form.Control placeholder="패스워드" ref={passwordRef} />
+            <Form.Control type="password" placeholder="패스워드" ref={passwordRef} />
             {
               passwordIncorrect &&
               <Form.Text className="text-danger pt-2">아이디 또는 비밀번호가 올바르지 않습니다!</Form.Text>
