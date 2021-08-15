@@ -1,0 +1,16 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dropdown-menu {
+  box-shadow: 0 2px 8px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.4rem 0;
+  .dropdown-header {
+    padding: 0.25rem 1.5rem !important;
+  }
+}

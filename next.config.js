@@ -1,13 +1,10 @@
-const withPWA = require('next-pwa')
+const withPWA = require('next-pwa');
 
 module.exports = withPWA({
   pwa: {
     disable: process.env.NODE_ENV === 'development',
     register: true,
-    sw: '/sw.js'
-  },
-  future: {
-    webpack5: true,
+    sw: '/sw.js',
   },
   webpack: (config) => {
     const oneOf = config.module.rules.find(
@@ -35,18 +32,16 @@ module.exports = withPWA({
         fs: false,
         net: false,
         tls: false,
-        "fs-extra": false
-      }
+        'fs-extra': false,
+      };
     }
 
-    config.module.rules.push(
-      {
-        test: /\.(md|txt)$/,
-        use: 'raw-loader'
-      }
-    )
+    config.module.rules.push({
+      test: /\.(md|txt)$/,
+      use: 'raw-loader',
+    });
 
     return config;
   },
   reactStrictMode: true,
-})
+});
