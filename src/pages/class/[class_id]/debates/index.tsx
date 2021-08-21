@@ -15,6 +15,7 @@ import useSWR from 'swr';
 import { User } from 'types/users';
 import Cookies from 'universal-cookie';
 import urljoin from 'url-join';
+import Link from 'next/link';
 
 interface DebatesProps {
   classId: string;
@@ -71,13 +72,11 @@ const Debates: NextPage<DebatesProps> = ({ classId }) => {
           >
             <Row>
               {debates.map((one) => (
-                <Col key={one.debateId}>
+                <Col key={one.debateId} xs={12} md={6}>
                   <Card border="light" className="shadow">
                     <Card.Header>
                       {one.subject} |{' '}
-                      <small>
-                        {members.find((m) => m.userId === one.created_by)?.name}
-                      </small>
+                      {members.find((m) => m.userId === one.created_by)?.name}
                     </Card.Header>
                     <Card.Body>
                       <div className="d-flex align-items-center pb-2">
@@ -102,39 +101,17 @@ const Debates: NextPage<DebatesProps> = ({ classId }) => {
                           </>
                         )}
                       </div>
-                      <Card.Text>
-                        우리 일상생활에서 사회 문제에 대해 토론합니다.
-                      </Card.Text>
+                      <Card.Text>{one.description}</Card.Text>
                     </Card.Body>
-                    <Button
-                      variant="light"
-                      onClick={() =>
-                        Router.push(`/class/${classId}/debates/asdf`)
-                      }
+                    <Link
+                      href={`/class/${classId}/debates/${one.debateId}`}
+                      passHref
                     >
-                      토론 참여하기
-                    </Button>
+                      <Button variant="light">토론 참여하기</Button>
+                    </Link>
                   </Card>
                 </Col>
               ))}
-              <Col>
-                <Card border="light" className="shadow">
-                  <Card.Header>
-                    국어 <small>XXX선생님</small>
-                  </Card.Header>
-                  <Card.Body>
-                    <div className="d-flex align-items-center pb-2">
-                      <Card.Text className="h3 font-weight-bold">
-                        국어 토론{' '}
-                      </Card.Text>
-                      <RemoveCircleIcon className="ml-2 mr-1" htmlColor="red" />
-                      닫힘
-                    </div>
-                    <Card.Text>국어 토론</Card.Text>
-                  </Card.Body>
-                  <Button variant="light">토론 다시보기</Button>
-                </Card>
-              </Col>
             </Row>
           </Container>
         ) : (
