@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from 'components/Layout';
+import Router from 'next/router';
 import { GetServerSideProps, NextPage } from 'next';
 import {
   Button,
@@ -74,7 +75,8 @@ const Boards: NextPage<BoardsProps> = ({ classId }) => {
               </Pagination>
             </Col>
             <Col xs={2}>
-              <Button variant="primary" className="align-items-right">
+              <Button variant="primary" className="align-items-right"   
+                  onClick={() => Router.push(`/class/${classId}/boards/asdf`)}>
                 글쓰기
               </Button>
             </Col>
