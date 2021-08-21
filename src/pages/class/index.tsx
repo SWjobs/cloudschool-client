@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from 'components/Layout';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import Router from 'next/router';
@@ -21,6 +21,14 @@ const Classrooms = () => {
         })
         .then((r) => r.data)
   );
+
+  useEffect(() => {
+    if (!new Cookies().get('token')) {
+      const lct = window.location;
+      localStorage.setItem('loginFrom', lct.pathname + lct.search);
+      window.location.assign('/login');
+    }
+  }, []);
 
   return (
     <Layout>

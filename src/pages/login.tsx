@@ -25,7 +25,9 @@ const Login: NextPage = () => {
         new Cookies().set('token', data.token, {
           maxAge: data.expires_in,
         });
-        Router.push('/', undefined, { shallow: true });
+        Router.push(localStorage.getItem('loginFrom') || '/', undefined, {
+          shallow: true,
+        });
       } catch (_e) {
         const e: AxiosError = _e;
         if (e.response?.status === 400) setPasswordIncorrect(true);

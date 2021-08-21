@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Nav } from 'react-bootstrap';
 import Link from 'next/link';
+import axios from 'axios';
+import api from 'datas/api';
+import useSWR from 'swr';
+import { Classroom } from 'types/classrooms';
+import Cookies from 'universal-cookie';
+import urljoin from 'url-join';
 
 const ClassLayout: React.FC<{ classId: string }> = ({ classId, children }) => {
   const [location, setLocation] = useState<Location | null>(null);
@@ -9,13 +15,25 @@ const ClassLayout: React.FC<{ classId: string }> = ({ classId, children }) => {
     setLocation(window.location);
   }, []);
 
+  const { data } = useSWR<Classroom>(
+    new Cookies().get('token') ? urljoin(api, `/classrooms/${classId}`) : null,
+    (url) =>
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${new Cookies().get('token')}`,
+          },
+        })
+        .then((r) => r.data)
+  );
+
   return (
     <>
       <div className="bg-primary" style={{ height: 110 }}>
         <Container fluid="sm" className="h-100 d-flex align-items-center">
           <div className="text-white">
-            <h1 style={{ fontSize: 32 }}>2021 1학년 1반</h1>
-            <div>2021학년도 1학년 1반 클래스</div>
+            <h1 style={{ fontSize: 32 }}>{data?.name}</h1>
+            <div>{data?.description}</div>
           </div>
         </Container>
       </div>
