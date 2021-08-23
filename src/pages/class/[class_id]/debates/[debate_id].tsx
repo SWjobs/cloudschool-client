@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from 'components/Layout';
 import { GetServerSideProps, NextPage } from 'next';
 import {
@@ -20,6 +20,7 @@ import Cookies from 'universal-cookie';
 import urljoin from 'url-join';
 import { Debate, DebateComment } from 'types/classrooms';
 import { User } from 'types/users';
+import { scroller } from 'react-scroll';
 import dayjs from 'dayjs';
 import dayjsRelativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
@@ -44,6 +45,9 @@ export const getServerSideProps: GetServerSideProps<DebateProps> = async (
 };
 
 const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
+  const [isSending, setIsSending] = useState(false);
+  const [content, setContent] = useState('');
+
   const { data: me } = useSWR<User>(
     new Cookies().get('token') ? urljoin(api, `/users/me`) : null,
     (url) =>
@@ -84,7 +88,7 @@ const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
         .then((r) => r.data)
   );
 
-  const { data: comments } = useSWR<DebateComment[]>(
+  const { data: comments, mutate: mutateComments } = useSWR<DebateComment[]>(
     new Cookies().get('token')
       ? urljoin(api, `/classrooms/${classId}/debates/${debateId}/comments`)
       : null,
@@ -135,10 +139,13 @@ const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
             {comments.map((one) => (
               <Row
                 key={one.commentId}
-                className="mt-5"
+                className={`mt-5 ${
+                  one.userId === me.userId ? 'flex-row-reverse' : ''
+                }`}
                 style={{ fontFamily: 'NanumBarunGothic' }}
               >
                 <Col
+                  xs={11}
                   className={`d-flex w-100 ${
                     one.userId === me.userId ? 'flex-row-reverse' : ''
                   }`}
@@ -189,8 +196,11 @@ const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
                 <Card>
                   <Card.Body className="p-2">
                     <FormControl
+                      id="comment-content"
                       as={TextareaAutosize}
                       type="text"
+                      value={content}
+                      onChange={(e) => setContent(e.target.value)}
                       placeholder="이곳에 의견을 입력합니다"
                       minRows={4}
                       maxRows={12}
@@ -201,7 +211,38 @@ const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
                     />
                   </Card.Body>
                   <Card.Footer className="p-2 text-right">
-                    <Button variant="success">의견 남기기</Button>
+                    <Button
+                      variant="success"
+                      disabled={isSending || !content.length}
+                      onClick={() => {
+                        setIsSending(true);
+                        axios
+                          .post(
+                            `${api}/classrooms/${classId}/debates/${debateId}`,
+                            {
+                              content: content,
+                            },
+                            {
+                              headers: {
+                                Authorization: `Bearer ${new Cookies().get(
+                                  'token'
+                                )}`,
+                              },
+                            }
+                          )
+                          .then((r) => {
+                            setContent('');
+                            mutateComments(comments.concat(r.data)).then(() => {
+                              scroller.scrollTo('comment-content', {
+                                smooth: true,
+                              });
+                            });
+                          })
+                          .finally(() => setIsSending(false));
+                      }}
+                    >
+                      {isSending ? '전송 중...' : '의견 남기기'}
+                    </Button>
                   </Card.Footer>
                 </Card>
               </Col>
