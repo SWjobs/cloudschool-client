@@ -3,10 +3,10 @@ import Layout from 'components/Layout';
 import { GetServerSideProps, NextPage } from 'next';
 import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap';
 import ClassLayout from 'components/ClassLayout';
-import Router from 'next/router';
 import {
   CheckCircle as CheckCircleIcon,
   RemoveCircle as RemoveCircleIcon,
+  Add as AddIcon,
 } from '@material-ui/icons';
 import { Debate } from 'types/classrooms';
 import axios from 'axios';
@@ -71,8 +71,18 @@ const Debates: NextPage<DebatesProps> = ({ classId }) => {
             style={{ fontFamily: 'NanumSquare' }}
           >
             <Row>
+              <Col className="text-right">
+                <Link href={`/class/${classId}/debates/create`} passHref>
+                  <Button variant="primary">
+                    <AddIcon className="mr-2" />새 토론 생성하기
+                  </Button>
+                </Link>
+              </Col>
+            </Row>
+            <hr className="mb-4" />
+            <Row>
               {debates.map((one) => (
-                <Col key={one.debateId} xs={12} md={6}>
+                <Col key={one.debateId} xs={12} md={6} className="mb-3">
                   <Card border="light" className="shadow">
                     <Card.Header>
                       {one.subject} |{' '}
@@ -97,7 +107,7 @@ const Debates: NextPage<DebatesProps> = ({ classId }) => {
                               className="ml-2 mr-1"
                               htmlColor="red"
                             />
-                            닫힘
+                            종료됨
                           </>
                         )}
                       </div>

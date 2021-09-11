@@ -24,6 +24,7 @@ import { scroller } from 'react-scroll';
 import dayjs from 'dayjs';
 import dayjsRelativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
+import DebateCreateNew from 'components/debates/DebateCreateNew';
 dayjs.locale('ko');
 dayjs.extend(dayjsRelativeTime);
 
@@ -44,7 +45,7 @@ export const getServerSideProps: GetServerSideProps<DebateProps> = async (
   };
 };
 
-const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
+const DebatePage: React.FC<DebateProps> = ({ classId, debateId }) => {
   const [isSending, setIsSending] = useState(false);
   const [content, setContent] = useState('');
 
@@ -99,7 +100,10 @@ const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
             Authorization: `Bearer ${new Cookies().get('token')}`,
           },
         })
-        .then((r) => r.data)
+        .then((r) => r.data),
+    {
+      refreshInterval: 2000,
+    }
   );
 
   return (
@@ -116,13 +120,13 @@ const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
                   <Card.Body>
                     <div className="d-flex align-items-center">
                       <Card.Text className="h3 font-weight-bold">
-                        사회 문제 토론{' '}
+                        {debate.name}{' '}
                       </Card.Text>
                       <CheckCircleIcon
                         className="ml-2 mr-1"
                         htmlColor="green"
                       />
-                      진행중
+                      {debate.status === 'open' ? '진행중' : '종료됨'}
                     </div>
                     <Card.Text className="pb-2">
                       {debate.subject} |{' '}
@@ -264,4 +268,12 @@ const DebatePage: NextPage<DebateProps> = ({ classId, debateId }) => {
   );
 };
 
-export default DebatePage;
+const Page: NextPage<DebateProps> = ({ classId, debateId }) => {
+  return debateId === 'create' ? (
+    <DebateCreateNew classId={classId} />
+  ) : (
+    <DebatePage classId={classId} debateId={debateId} />
+  );
+};
+
+export default Page;
