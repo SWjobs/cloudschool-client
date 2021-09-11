@@ -46,7 +46,14 @@ const Classrooms = () => {
               <Button variant="primary" className="shadow">
                 클래스 참가하기
               </Button>
-              <Button variant="outline-primary" className="ml-2 shadow">
+              <Button variant="outline-primary" className="ml-2 shadow"
+              
+              onClick={() =>
+                Router.push(`/class/create`, undefined, {
+                  shallow: true,
+                })
+              }
+              >
                 새 클래스 만들기
               </Button>
             </Col>
