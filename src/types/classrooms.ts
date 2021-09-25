@@ -7,11 +7,15 @@ export interface Classroom {
 
 export interface TimeTableCell {
   uuid: string;
-  classId: string;
   dayweek: number;
   period: number;
   subject: string;
   teacher: string;
+}
+
+export interface TimeTable {
+  classId: string;
+  cells: TimeTableCell[];
 }
 
 export interface Notice {
@@ -40,4 +44,15 @@ export interface DebateComment {
   userId: string;
   content: string;
   created_at: string;
+}
+
+export interface Assignment {
+  projectId: string;
+  classId: string;
+  title: string;
+  content: string;
+  writerId: string;
+  subject: string;
+  created_at: string;
+  deadline: string;
 }

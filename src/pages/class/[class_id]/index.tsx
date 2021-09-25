@@ -7,7 +7,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import api from 'datas/api';
 import useSWR from 'swr';
-import { Debate, Notice } from 'types/classrooms';
+import { Debate, Notice, TimeTableCell } from 'types/classrooms';
 import Cookies from 'universal-cookie';
 import urljoin from 'url-join';
 import { User } from 'types/users';
@@ -35,6 +35,20 @@ export const getServerSideProps: GetServerSideProps<ClassHomeProps> = async (
 
 const ClassHome: NextPage<ClassHomeProps> = ({ classId }) => {
   const [time, setTime] = useState(new Date());
+
+  const { data: timetables } = useSWR<TimeTableCell[]>(
+    new Cookies().get('token')
+      ? urljoin(api, `/classrooms/${classId}/timetable`)
+      : null,
+    (url) =>
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${new Cookies().get('token')}`,
+          },
+        })
+        .then((r) => r.data)
+  );
 
   const { data: notices } = useSWR<Notice[]>(
     new Cookies().get('token')
@@ -87,7 +101,8 @@ const ClassHome: NextPage<ClassHomeProps> = ({ classId }) => {
       <ClassLayout classId={classId}>
         {notices !== undefined &&
         debates !== undefined &&
-        members !== undefined ? (
+        members !== undefined &&
+        timetables !== undefined ? (
           <Container
             fluid="lg"
             className="mt-4 mb-5"
